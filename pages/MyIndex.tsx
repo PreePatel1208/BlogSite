@@ -4,46 +4,44 @@ import styles from '../styles/Home.module.css';
 import Nav from './Component/Navbar/Nav';
 import PostCard from './Component/post/PostCard';
 
-
 interface Props{
     posts:Array<{ 
-     title: string,
-      content: string
-      createdAt:Date
+        _id: PostID;
+        title: string;
+        content: string;
+        createdAt: Date;
+        published: Date;
      }>
  }
-
-export default function MyIndex({ posts }:Props) {
+ interface PostID{
+    postId:BodyInit
+ }
+const MyIndex=({ posts }:Props) =>{
+    // console.log(posts);
+    
     return (
-        <div>
-            <Head>
-                <title>Home</title>
-            </Head>
-
-            <Nav/>
-
-            <main>
-                <div className={styles.container}>
-                    {posts.length === 0 ? (
+    
+            <>
+                {posts.length === 0 ? (
                         <h2>No added posts</h2>
                     ) : (
-                        <ul>
+                        <>
+                        <div className="grid-container">
                             {posts.map((post, i) => (
                                 <PostCard post={post} key={i} />
                             ))}
-                        </ul>
+  
+
+                            </div>
+                        </>
                     )}
-                </div>
-            </main>
-        </div>
+                </>
+         
     );
 }
 
-export async function getServerSideProps() {
+  export default MyIndex
 
-  return {
-      props: {
-          posts: ['message'],
-      },
-  };
-}
+
+
+

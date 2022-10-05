@@ -16,12 +16,12 @@ const Footer = () => {
 
       <a href="#" className="footer-logo">
       <Image
-                        src={Image1}
+                        src={Image2}
                         alt="Logo"
                         height={150}
                         width={150}
                         layout="intrinsic"
-                        className="logo-light"
+                        className="logo-dark"
                     />
                      {/* <Image
                         src={Image2}

@@ -12,7 +12,7 @@ export default function Nav() {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/add-post">
+                    <Link href="/Component/post/add-post">
                         <a>Add post</a>
                     </Link>
                 </li>

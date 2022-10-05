@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Nav from '../Navbar/Nav';
 
 // import Nav from '../components/Nav';
 import styles from '../../../styles/Home.module.css';
 
-export default function AddPost() {
+
+   
+
+const AddPost=() =>{
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [error, setError] = useState('');
@@ -19,6 +22,35 @@ export default function AddPost() {
 
         // fields check
         if (!title || !content) return setError('All fields are required');
+
+        // post structure
+        let post = {
+            title,
+            content,
+            published: false,
+            createdAt: new Date().toISOString(),
+        };
+        console.log('post',post);
+        
+        // save the post
+        let response = await fetch('/api/posts', {
+            method: 'POST',
+            body: JSON.stringify(post),
+        });
+
+        // get the data
+        let data = await response.json();
+
+        if (data.success) {
+            // reset the fields
+            setTitle('');
+            setContent('');
+            // set the message
+            return setMessage(data.message);
+        } else {
+            // set the error
+            return setError(data.message);
+        }
     };
 
     return (
@@ -63,3 +95,4 @@ export default function AddPost() {
         </div>
     );
 }
+export default AddPost

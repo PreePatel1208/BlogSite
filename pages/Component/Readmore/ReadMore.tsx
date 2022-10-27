@@ -4,6 +4,7 @@ import React, { useState } from "react";
 interface Props{
     children:string
 }
+
   
 const ReadMore = ({ children }:Props) => {
   const text = children;
@@ -13,7 +14,9 @@ const ReadMore = ({ children }:Props) => {
   };
   return (
     <>
-      {isReadMore ? text.slice(0, 100) : text}
+      {/* {isReadMore ?  : text} */}
+      <div className="product-des" dangerouslySetInnerHTML={{ __html: isReadMore? text.slice(0, 100): text}} />
+
       <span onClick={toggleReadMore} className="read-or-hide" >
         {isReadMore ? "...read more" : " show less"}
       </span>

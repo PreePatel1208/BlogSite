@@ -7,6 +7,7 @@ import MyIndex from './MyIndex';
 // import Ckeditor from './text-editor-blog/Ckeditor';
 
 const Home: NextPage = ({ posts }:any) => {
+console.log("posts",posts);
 
   return (
     <>

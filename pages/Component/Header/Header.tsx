@@ -1,9 +1,11 @@
 import React from 'react'
-import Image, { ImageProps } from 'next/image';
-import Image1 from '../../../assets/images/logo-light.svg'
+import Image from 'next/image';
 import Image2 from '../../../assets/images/logo-dark.svg'
+import { useRouter } from 'next/router'
+
 
 const Header = () => {
+    const router = useRouter()
     return (
         <>
             <header>
@@ -19,16 +21,17 @@ const Header = () => {
                                 className="logo-dark"
                             />
                         </a>
-                        <div className="flex-wrapper">
-                            <ul className="desktop-nav">
+                        <div className="">
+                            <ul className="flex-wrapper">
                                 <li>
-                                    <a href="#" className="nav-link">Home</a>
+                                    <a href="#" className="" >Home</a>
                                 </li>
+                              <li>
+                              <a className="" onClick={()=>{ router.push('Component/post/add-post')}}>About Me</a>
+                              </li>
+
                                 <li>
-                                    <a href="#" className="nav-link">About Me</a>
-                                </li>
-                                <li>
-                                    <a href="#" className="nav-link">Contact</a>
+                                    <a href="#" onClick={()=>{ router.push('contact-us')}} className="">Contact</a>
                                 </li>
                             </ul>
                         </div>

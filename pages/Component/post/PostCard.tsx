@@ -4,7 +4,6 @@ import Image, { ImageProps } from 'next/image';
 import Image3 from '../../../assets/images/blog-9.png'
 import ReadMore from '../Readmore/ReadMore';
 
-
 interface Props {
     post: {
         _id: PostID
@@ -23,7 +22,7 @@ export default function PostCard({ post }: Props) {
     const [publishing, setPublishing] = useState(false);
     const [deleting, setDeleting] = useState(false);
     const router = useRouter();
-    const publishPost = async (postId) => {
+    const publishPost = async (postId:any) => {
         setPublishing(true);
 
         try {
@@ -38,7 +37,7 @@ export default function PostCard({ post }: Props) {
         }
     };
 
-    const deletePost = async (postId) => {
+    const deletePost = async (postId:any) => {
         setDeleting(true);
         try {
             console.log('object id', postId);
@@ -54,7 +53,9 @@ export default function PostCard({ post }: Props) {
             return setDeleting(false);
         }
     };
-
+const handleTitleClick=()=>{
+    router.push('/counter=10')
+}
     return (
         <>
             <div className="grid-item">
@@ -68,11 +69,11 @@ export default function PostCard({ post }: Props) {
                     </div>
                     <div className="blog-content-wrapper">
                         <button className="blog-topic text-tiny">Accessibility</button>
-                        <h3><a href="" className="h3">{post.title}</a>
+                        <h3><a href="" className="h3" onClick={handleTitleClick}>{post.title}</a>
                         </h3>
-                        <p className="blog-text">
+                        <div className="blog-text">
                             <ReadMore children= {post.content} />
-                        </p>
+                        </div>
                         {/* <small>{new Date(post.createdAt).toLocaleDateString()}</small> */}
                         {/* <br /> */}
                         {/* {!post.published ? (

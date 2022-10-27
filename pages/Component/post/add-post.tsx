@@ -1,54 +1,50 @@
 import React, { useState } from 'react';
 import Nav from '../Navbar/Nav';
-
-// import Nav from '../components/Nav';
 import styles from '../../../styles/Home.module.css';
+import Ckeditor from '../../text-editor-blog/Ckeditor';
 
-
-   
-
-const AddPost=() =>{
+const AddPost = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
 
-    const handlePost = async (e:React.FormEvent<HTMLFormElement>) => {
+    const handlePost = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        // reset error and message
         setError('');
         setMessage('');
 
-        // fields check
         if (!title || !content) return setError('All fields are required');
+        const slugify = (str:string) =>
+        str
+          .toLowerCase()
+          .trim()
+          .replace(/[^\w\s-]/g, '')
+          .replace(/[\s_-]+/g, '-')
+          .replace(/^-+|-+$/g, '');
 
-        // post structure
         let post = {
             title,
             content,
+            slug:slugify(title),
             published: false,
             createdAt: new Date().toISOString(),
         };
-        console.log('post',post);
-        
+        console.log('post', post);
+
         // save the post
         let response = await fetch('/api/posts', {
             method: 'POST',
             body: JSON.stringify(post),
         });
 
-        // get the data
         let data = await response.json();
 
         if (data.success) {
-            // reset the fields
             setTitle('');
             setContent('');
-            // set the message
             return setMessage(data.message);
         } else {
-            // set the error
             return setError(data.message);
         }
     };
@@ -58,6 +54,9 @@ const AddPost=() =>{
             <Nav />
             <div className={styles.container}>
                 <form onSubmit={handlePost} className={styles.form}>
+                    <div className="mb-3">
+                        <input type="text" className="form-control" value={title} onChange={(e)=>{setTitle(e.target.value)}} id="exampleFormControlInput1" placeholder="tittle" />
+                    </div>
                     {error ? (
                         <div className={styles.formItem}>
                             <h3 className={styles.error}>{error}</h3>
@@ -68,25 +67,8 @@ const AddPost=() =>{
                             <h3 className={styles.message}>{message}</h3>
                         </div>
                     ) : null}
-                    <div className={styles.formItem}>
-                        <label>Title</label>
-                        <input
-                            type="text"
-                            name="title"
-                            onChange={(e) => setTitle(e.target.value)}
-                            value={title}
-                            placeholder="title"
-                        />
-                    </div>
-                    <div className={styles.formItem}>
-                        <label>Content</label>
-                        <textarea
-                            name="content"
-                            onChange={(e) => setContent(e.target.value)}
-                            value={content}
-                            placeholder="Post content"
-                        />
-                    </div>
+
+                    <Ckeditor {...{ content, setContent }} />
                     <div className={styles.formItem}>
                         <button type="submit">Add post</button>
                     </div>

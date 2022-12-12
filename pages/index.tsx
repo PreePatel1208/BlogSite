@@ -1,14 +1,18 @@
 import type { NextPage } from 'next'
 import Head from 'next/head';
+import { useDispatch } from 'react-redux/es/exports';
 import Footer from './Component/Footer/Footer';
 import Header from './Component/Header/Header';
 import Myprofile from './Component/my-profile/myprofile';
 import MyIndex from './MyIndex';
+import {getAllPosts} from './../store/reducer/postSlice'
 // import Ckeditor from './text-editor-blog/Ckeditor';
 
-const Home: NextPage = ({ posts }:any) => {
-console.log("posts",posts);
+const Home: NextPage = () => {
 
+const dispatch=useDispatch()
+
+dispatch(getAllPosts())
   return (
     <>
       <Head>
@@ -20,7 +24,7 @@ console.log("posts",posts);
       <div className="dark-theme">
         <Header />
         <Myprofile />
-        <MyIndex {...{ posts }} />
+        {/* <MyIndex {...{ posts }} /> */}
         {/* <AddPost/> */}
         <Footer />
       </div>  
@@ -28,15 +32,7 @@ console.log("posts",posts);
   )
 }
 export async function getServerSideProps() {
-  let dev = process.env.NODE_ENV !== 'production';
-  let { DEV_URL, PROD_URL } = process.env;
-  const res = await fetch(`${dev ? DEV_URL : PROD_URL}/api/posts`,
-    {
-      method: 'GET',
-    }
-  )
-  const json = await res.json()
-  return { props: { posts: json.message } }
+useDispatch()
 }
 export default Home
 

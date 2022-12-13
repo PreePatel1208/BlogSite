@@ -13,17 +13,19 @@ interface Props {
 interface PostID {
     postId: BodyInit
 }
-const MyIndex = () => {
+const MyIndex = ({ posts }: any) => {
+    console.log("myin", posts);
 
     return (
 
         <>
             <div className="grid-container">
-                <PostCard />
+                {posts.map((post: any) =>
+                    <PostCard {...{ post }} />
+                )}
+
             </div>
         </>
-
-
 
     );
 }

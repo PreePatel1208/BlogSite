@@ -1,33 +1,31 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import axios from 'axios'
+import PostCard from './Component/post/PostCard';
+import SiglePost from './Component/post/SiglePost';
+
 
 const PostSlug = ({posts}:any) => {
-  
-  const router = useRouter()
-  const slug = router.query
-  const { query } = useRouter();
+ console.log("posts",posts);
  
+
   return (
     <>
-      <h1>
-        {query['post-slug']}
-      </h1>
+      
+     <SiglePost {...{posts}}/>
+      
     </>
   )
 }
-export async function getServerSideProps() {
-  let dev = process.env.NODE_ENV !== 'production';
-  let { DEV_URL, PROD_URL } = process.env;
-  let data = {
-    slug: "my-slug-post"
-  }
-  const res = await fetch(`${dev ? DEV_URL : PROD_URL}/api/posts`,
-    {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }
-  )
-  // const json = await res.json()
-  return { props: { posts: "res" } }
+export async function getServerSideProps(ctx:any) {
+  var id = ctx.query['post-slug'];
+
+  const baseURL = `http://localhost:2500/post/${id}`;
+  let postData
+  await axios.get(baseURL).then((response) => {
+  postData=response.data.data
+    
+  });
+  return { props: { posts: postData } }
 }
 export default PostSlug

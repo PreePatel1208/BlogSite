@@ -1,12 +1,20 @@
+
 import type { NextPage } from 'next'
 import Head from 'next/head';
+
 import Footer from './Component/Footer/Footer';
 import Header from './Component/Header/Header';
 import Myprofile from './Component/my-profile/myprofile';
 import MyIndex from './MyIndex';
-// import Ckeditor from './text-editor-blog/Ckeditor';
+import axios from 'axios';
+import { store } from '../store/store';
 
-const Home: NextPage = () => {
+
+const Home: NextPage = ({posts}:any) => {
+
+ 
+console.log("posts",posts);
+
 
   return (
     <>
@@ -17,16 +25,26 @@ const Home: NextPage = () => {
       {/* <body className="light-theme"></body> */}
       <div className="dark-theme">
         <Header />
+        
         <Myprofile />
-        <MyIndex />
+        <MyIndex {...{posts}} />
         {/* <AddPost/> */}
         <Footer />
       </div>  
     </>
   )
 }
+export type AppDispatch = typeof store.dispatch
 
-  
+export async function getServerSideProps() {
+  const baseURL = "http://localhost:2500/post";
+  let postData
+  await axios.get(baseURL).then((response) => {
+  postData=response.data.data
+    
+  });
+  return { props: { posts:postData } }
+}
 export default Home
 
 

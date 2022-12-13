@@ -18,41 +18,41 @@ interface PostID {
     postId: BodyInit
 }
 
-export default function PostCard({ post }: Props) {
+export default function PostCard() {
     const [publishing, setPublishing] = useState(false);
     const [deleting, setDeleting] = useState(false);
     const router = useRouter();
-    const publishPost = async (postId:any) => {
-        setPublishing(true);
+    // const publishPost = async (postId:any) => {
+    //     setPublishing(true);
 
-        try {
-            await fetch('/api/posts', {
-                method: 'PUT',
-                body: postId,
-            });
-            setPublishing(false);
-            return router.push(router.asPath);
-        } catch (error) {
-            return setPublishing(false);
-        }
-    };
+    //     try {
+    //         await fetch('/api/posts', {
+    //             method: 'PUT',
+    //             body: postId,
+    //         });
+    //         setPublishing(false);
+    //         return router.push(router.asPath);
+    //     } catch (error) {
+    //         return setPublishing(false);
+    //     }
+    // };
 
-    const deletePost = async (postId:any) => {
-        setDeleting(true);
-        try {
-            console.log('object id', postId);
-            const response = await fetch('/api/posts', {
-                method: 'DELETE',
-                body: postId,
-            });
-            let data = await response.json();
-            console.log('response', data);
-            setDeleting(false);
-            console.log("deleting");
-        } catch (error) {
-            return setDeleting(false);
-        }
-    };
+    // const deletePost = async (postId:any) => {
+    //     setDeleting(true);
+    //     try {
+    //         console.log('object id', postId);
+    //         const response = await fetch('/api/posts', {
+    //             method: 'DELETE',
+    //             body: postId,
+    //         });
+    //         let data = await response.json();
+    //         console.log('response', data);
+    //         setDeleting(false);
+    //         console.log("deleting");
+    //     } catch (error) {
+    //         return setDeleting(false);
+    //     }
+    // };
 const handleTitleClick=()=>{
     router.push('/counter=10')
 }
@@ -69,10 +69,10 @@ const handleTitleClick=()=>{
                     </div>
                     <div className="blog-content-wrapper">
                         <button className="blog-topic text-tiny">Accessibility</button>
-                        <h3><a href="" className="h3" onClick={handleTitleClick}>{post.title}</a>
+                        <h3><a href="" className="h3">Hello World</a>
                         </h3>
                         <div className="blog-text">
-                            <ReadMore children= {post.content} />
+                            <ReadMore children="The Taj Mahal is an ivory-white marble mausoleum on the south bank of the Yamuna river in the Indian city of Agra. It was commissioned in 1632 by the Mughal emperor, Shah Jahan (reigned from 1628 to 1658), to house the tomb of his favourite wife, Mumtaz Mahal"  />
                         </div>
                         {/* <small>{new Date(post.createdAt).toLocaleDateString()}</small> */}
                         {/* <br /> */}

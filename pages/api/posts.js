@@ -1,9 +1,6 @@
 const { connectToDatabase } = require('../../pages/Lib/mongodb');
 const ObjectId = require('mongodb').ObjectId;
 
-
-
-
 export default async function handler(req, res) {
     // switch the methods
     switch (req.method) {

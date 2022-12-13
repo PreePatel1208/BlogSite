@@ -10,63 +10,51 @@ const SiglePost = ({ posts }: any) => {
     <>
       <div className="dark-theme">
         <Header />
-        <div className="header">
-          <h2>Blog Name</h2>
-        </div>
+
 
         <div className="row">
           <div className="leftcolumn">
             <div className="card">
-              <div className="grid-item">
-                <div className="blog-card">
-                  <div className="blog-card-banner">
-                    <Image
-                      src={Image3}
-                      layout="intrinsic"
-                      className="blog-banner-img"
-                    />
-                  </div>
-                  <div className="blog-content-wrapper">
-                    <button className="blog-topic text-tiny">Accessibility</button>
-                    <h3><a href={posts.slug} className="h3">{posts.title}</a>
-                    </h3>
-                    <div className="blog-text">
-                      <ReadMore children={posts.body} />
-                    </div>
-                    <small>{new Date(posts.created).toLocaleDateString()}</small>
-                    <br />
+              <h2>{posts.title}</h2>
+              <h5>{new Date(posts.created).toLocaleDateString()}</h5>
+              <div className="fakeimg" style={{ height: "400px" }}>
 
-                  </div>
-                </div>
+                <Image
+                  src={Image3}
+                  layout="intrinsic"
+                  className="blog-banner-img"
+                  height= "350px"
+                />
               </div>
-
-            </div>
-            </div>
-            <div className="rightcolumn">
-              <div className="card">
-                <h2>About Me</h2>
-                <div className="fakeimg" style={{ height: "200px" }}>Image</div>
-                <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-              </div>
-              <div className="card">
-                <h3>Popular Post</h3>
-                <div className="fakeimg">Image</div>
-                <div className="fakeimg">Image</div>
-                <div className="fakeimg">Image</div>
-              </div>
-            </div>
-            <div className="card">
-              <h3>Follow Me</h3>
               <p>Some text..</p>
+              <div>{posts.body}</div>
             </div>
           </div>
-
-
-          <Footer />
+          <div className="rightcolumn">
+            <div className="card">
+              <h2>About Me</h2>
+              <div className="fakeimg" style={{ height: "200px" }}>Image</div>
+              <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+            </div>
+            <div className="card">
+              <h3>Popular Post</h3>
+              <div className="fakeimg">Image</div>
+              <div className="fakeimg">Image</div>
+              <div className="fakeimg">Image</div>
+            </div>
+          </div>
+          <div className="card">
+            <h3>Follow Me</h3>
+            <p>Some text..</p>
+          </div>
         </div>
- 
-      </>
-      )
+
+
+        <Footer />
+      </div>
+
+    </>
+  )
 }
 
-      export default SiglePost
+export default SiglePost

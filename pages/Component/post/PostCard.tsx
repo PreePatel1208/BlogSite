@@ -25,8 +25,8 @@ export default function PostCard({post}:Props) {
     console.log("post",post);
     
    
-const handleTitleClick=()=>{
-    router.push('/counter=10')
+const handleTitleClick=(route:any)=>{
+    router.push(`/${route}`)
 }
     return (
         <>
@@ -41,7 +41,7 @@ const handleTitleClick=()=>{
                     </div>
                     <div className="blog-content-wrapper">
                         <button className="blog-topic text-tiny">Accessibility</button>
-                        <h3><a href={post.slug} className="h3">{post.title}</a>
+                        <h3><a href="#" onClick={()=>{handleTitleClick(post.slug)}} className="h3">{post.title}</a>
                         </h3>
                         <div className="blog-text">
                             <ReadMore children={post.body}  />

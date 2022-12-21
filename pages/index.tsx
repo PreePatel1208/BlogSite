@@ -26,7 +26,7 @@ console.log("posts",posts);
       <div className="dark-theme">
         <Header />
         
-        <Myprofile />
+        {/* <Myprofile /> */}
         <MyIndex {...{posts}} />
         {/* <AddPost/> */}
         <Footer />

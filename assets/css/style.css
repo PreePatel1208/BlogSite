@@ -1072,3 +1072,13 @@ footer .wrapper { text-align: center; }
   .footer-link { margin-bottom: 0.3rem; }
 
 }
+/* preet css */
+.title{
+  text-align: center;
+}
+.body{
+  display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}

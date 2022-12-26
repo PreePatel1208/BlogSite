@@ -33,6 +33,9 @@ const Header = () => {
                                 <li>
                                     <a href="#" onClick={()=>{ router.push('contact-us')}} className="">Contact</a>
                                 </li>
+                                <li>
+                                    <a href="#" onClick={()=>{ router.push('login')}} className="">Login</a>
+                                </li>
                             </ul>
                         </div>
 

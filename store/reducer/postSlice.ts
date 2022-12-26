@@ -6,7 +6,7 @@ const baseURL="http://localhost:2500/"
 export const getAllPosts = createAsyncThunk(
   'users/fetchByIdStatus',
   async () => {
-    const response = await axios.get(baseURL+"post")
+    const response = await axios.get(baseURL+"posts")
     .then((response) => {
       console.log("response",response);
         
@@ -14,7 +14,6 @@ export const getAllPosts = createAsyncThunk(
       console.log("error",err);
       
     }) 
-  
   }
 )
 

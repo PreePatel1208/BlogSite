@@ -7,6 +7,7 @@ import ReadMore from '../Readmore/ReadMore';
 interface Props {
     post: {
         _id: PostID
+        image:object,
         title: string,
         body: string,
         slug: string,
@@ -18,6 +19,8 @@ interface PostID {
     postId: BodyInit
 }
 
+
+
 export default function PostCard({post}:Props) {
     const [publishing, setPublishing] = useState(false);
     const [deleting, setDeleting] = useState(false);
@@ -28,23 +31,29 @@ export default function PostCard({post}:Props) {
 const handleTitleClick=(route:any)=>{
     router.push(`/${route}`)
 }
+
+const myLoader = () => {
+    return `${post.image}`
+  }
+  
     return (
         <>
             <div className="grid-item">
                 <div className="blog-card">
+               
                     <div className="blog-card-banner">
-                        <Image
-                            src={Image3}
-                            layout="intrinsic"
+                        <img
+                            src={`http://localhost:2500/${post.image?.filename}`}
+                       
                             className="blog-banner-img"
                         />
                     </div>
                     <div className="blog-content-wrapper">
                         <button className="blog-topic text-tiny">Accessibility</button>
-                        <h3><a href="#" onClick={()=>{handleTitleClick(post.slug)}} className="h3">{post.title}</a>
+                        <h3><a href="#" onClick={()=>{handleTitleClick(post.slug)}} className="h3">{post.slug}</a>
                         </h3>
                         <div className="blog-text">
-                            <ReadMore children={post.body}  />
+                            <ReadMore children={post.title}  />
                         </div>
                         <small>{new Date(post.created).toLocaleDateString()}</small>
                         <br />

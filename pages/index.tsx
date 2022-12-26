@@ -10,6 +10,7 @@ import axios from 'axios';
 import { store } from '../store/store';
 
 
+
 const Home: NextPage = ({posts}:any) => {
 
  
@@ -37,10 +38,10 @@ console.log("posts",posts);
 export type AppDispatch = typeof store.dispatch
 
 export async function getServerSideProps() {
-  const baseURL = "http://localhost:2500/post";
+  const baseURL = "http://localhost:2500/posts";
   let postData
   await axios.get(baseURL).then((response) => {
-  postData=response.data.data
+  postData=response.data.result
     
   });
   return { props: { posts:postData } }
